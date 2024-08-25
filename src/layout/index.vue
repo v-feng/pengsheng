@@ -12,7 +12,7 @@
           </Link>
         </div>
       </div>
-      <div class="header-right">
+      <div class="header-right" v-if="!sizeFlag">
         <span
           class="header-right-item"
           v-for="(item, index) in menuList"
@@ -21,6 +21,10 @@
         >
           {{ item.enName }}
         </span>
+      </div>
+      <div class="header-menu" v-if="sizeFlag" @click="handleClickMenu">
+        <Icon type="md-menu" size="26" v-if="!showMenu" />
+        <Icon type="ios-close" v-else />
       </div>
     </header>
     <Content class="layout-content"><RouterView /></Content>
@@ -31,6 +35,7 @@
 import homeIcon from '@/assets/images/icon/favicon.png';
 import { useRouter } from 'vue-router';
 import { RouterView } from 'vue-router';
+import { onMounted, ref } from 'vue';
 const menuList = [
   {
     zhName: '历年作品',
@@ -59,12 +64,30 @@ const menuList = [
   },
 ];
 const router = useRouter();
+onMounted(() => {
+  window.addEventListener('resize', onResize);
+  onResize();
+});
 
+const sizeFlag = ref(false);
+const onResize = () => {
+  let bodyWidth = document.body.getBoundingClientRect().width;
+  console.log(bodyWidth);
+  if (bodyWidth <= 800) {
+    sizeFlag.value = true;
+  } else {
+    sizeFlag.value = false;
+  }
+};
 const toHome = () => {
   router.push('/');
 };
 const handleMenu = (path) => {
   router.push(path);
+};
+const showMenu = ref(false);
+const handleClickMenu = () => {
+  showMenu.value = !showMenu.value;
 };
 </script>
 
@@ -78,7 +101,6 @@ const handleMenu = (path) => {
 }
 .header {
   padding: 5px 20px;
-  margin-bottom: 5px;
   position: fixed;
   top: 0;
   left: 0;
@@ -88,7 +110,9 @@ const handleMenu = (path) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  .header-menu {
+    cursor: pointer;
+  }
   &-left {
     &-logo {
       width: 160px;
@@ -96,9 +120,8 @@ const handleMenu = (path) => {
       padding-top: 10px;
 
       img {
-        width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
   }
@@ -110,11 +133,24 @@ const handleMenu = (path) => {
       font-size: 16px;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       font-weight: 600;
-
-      &:hover {
-        color: #f0a70a;
-      }
     }
   }
+}
+
+.toggle {
+  visibility: visible;
+  opacity: 1;
+  float: right;
+  transition:
+    opacity 0.4s cubic-bezier(0.075, 0.82, 0.165, 1),
+    visibility 0s;
+}
+
+.common-toggle {
+  visibility: hidden;
+  opacity: 1;
+  transition:
+    opacity 0.4s cubic-bezier(0.075, 0.82, 0.165, 1),
+    visibility 0s;
 }
 </style>

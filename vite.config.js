@@ -22,4 +22,12 @@ export default defineConfig({
       },
     },
   },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://www.dmoe.cc/random.php?return=json',
+        changeOrigin: true,
+      },
+    },
+  },
 });

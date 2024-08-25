@@ -8,3 +8,11 @@ export const postAuditPass = (payload) =>
     rawRes: true,
     payload,
   });
+
+export const imgList = (payload) =>
+  request({
+    mockUrl: 'https://f2e.dxy.net/mock-api/client/5e785abd1efd75575ad4af02',
+    url: 'https://www.dmoe.cc/random.php?return=json',
+    method: 'get',
+    payload,
+  });

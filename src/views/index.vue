@@ -1,30 +1,38 @@
 <template>
-  <Swiper
-    loop
-    :modules="modules"
-    :noSwiping="true"
-    class="mySwiper"
-    :slides-per-view="1"
-    :pauseOnMouseEnter="true"
-    :reverseDirection="true"
-    :autoplay="{ delay: 3000 }"
-    @swiper="onSwiper"
-    ref="swiperInstance"
-    :pagination="{ clickable: true }"
-    :mousewheel="{ mousewheel: true }"
-    @click="handleClick"
-  >
-    <swiper-slide v-for="(item, index) in data" :key="index">
-      <img :src="item.url" :alt="item.alt" />
-      <div class="slide-text">{{ item.alt }}</div>
-    </swiper-slide>
-  </Swiper>
+  <div class="swiper-container">
+    <Swiper
+      loop
+      :modules="modules"
+      :noSwiping="true"
+      :slides-per-view="1"
+      :pauseOnMouseEnter="true"
+      :reverseDirection="true"
+      :autoplay="{ delay: 3000 }"
+      class="mySwiper"
+      @swiper="onSwiper"
+      ref="swiperInstance"
+      :pagination="{ clickable: true }"
+      :mousewheel="{ mousewheel: true }"
+      @click="handleClick"
+      direction="vertical"
+    >
+      <swiper-slide
+        v-for="(item, index) in data"
+        :key="index"
+        class="swiper-image"
+      >
+        <img :src="item.url" :alt="item.alt" />
+        <div class="slide-text">{{ item.alt }}</div>
+      </swiper-slide>
+    </Swiper>
+  </div>
 </template>
 <script setup>
+import { imgList } from '@/api/index';
 import { useRoute, useRouter } from 'vue-router';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Autoplay, Parallax, Mousewheel, Pagination } from 'swiper/modules';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import 'swiper/css';
 import 'swiper/css/pagination'; // 轮播图底面的小圆点
 import img1 from '@/assets/images/MODERN-LUXURY-DESIGN-KITCHENS.webp';
@@ -83,6 +91,11 @@ const data = [
     id: 7,
   },
 ];
+onMounted(() => {
+  // imgList({}).then((res) => {
+  //   console.log(res);
+  // });
+});
 const swiperInstance = ref(null);
 const onSwiper = (swiper) => {
   swiperInstance.value = swiper;
@@ -100,33 +113,29 @@ const handleClick = (swiper, event) => {
 </script>
 
 <style lang="less" scoped>
+.swiper-container {
+  height: 100vh;
+}
 .mySwiper {
   width: 100%;
+  height: 100%;
 }
-
-.swiper-container {
-  position: relative;
-}
-.mySwiper .swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  //   position: relative;
-}
-
-.mySwiper .swiper-slide img {
-  display: block;
+.swiper-image {
   width: 100%;
-  object-fit: contain;
+  position: relative;
+  img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+  }
 }
 .slide-text {
   position: absolute;
   bottom: 0;
   left: 5px;
-  font-size: 13px;
+  font-size: 16px;
   line-height: 20px;
+  color: #fff;
+  font-weight: 600;
 }
 </style>
