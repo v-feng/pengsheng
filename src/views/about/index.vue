@@ -16,7 +16,7 @@
     <br />
     <div v-for="(item, index) in list">
       <h6>{{ item.title }}</h6>
-      <p v-for="v in item.team" >
+      <p v-for="v in item.team">
         <Image :src="v.avatar" />
       </p>
     </div>
@@ -90,5 +90,13 @@ const list = [
   max-width: 1300px;
   margin-left: auto;
   margin-right: auto;
+}
+@media screen and (max-width: 900px) {
+  .container {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: calc(100% - 80px);
+    font-size: 16px;
+  }
 }
 </style>
