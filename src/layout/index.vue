@@ -29,7 +29,7 @@
 
 <script setup>
 import homeIcon from '@/assets/images/icon/favicon.png';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { RouterView } from 'vue-router';
 const menuList = [
   {
