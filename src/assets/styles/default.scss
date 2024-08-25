@@ -1,0 +1,65 @@
+ul {
+    list-style: none;
+}
+
+body {
+    margin: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+    /* Chrome Safari */
+}
+
+#__nuxt{
+    padding-top: 50.5px;
+    height: 100vh;
+}
+.index,.layout {
+    height: 100%;
+}
+
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+
+.desc {
+    position: absolute;
+    bottom: 50px;
+    left: 20px;
+    color: #fff;
+    font-size: 36px;
+    line-height: 35px;
+    font-family: inherit;
+    font-weight: 300;
+    text-align: left;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+:root {
+    --e-global-typography-primary-font-family: "Roboto";
+    --e-global-typography-primary-font-weight: 600;
+    --e-global-typography-secondary-font-family: "Roboto Slab";
+    --e-global-typography-secondary-font-weight: 400;
+    --e-global-typography-text-font-family: "Roboto";
+    --e-global-typography-text-font-weight: 400;
+    --e-global-typography-accent-font-family: "Roboto";
+    --e-global-typography-accent-font-weight: 500;
+}

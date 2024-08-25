@@ -1,0 +1,23 @@
+.footer {
+    height: 100px;
+    
+    &-desc {
+        height: 80px;
+        font-size: 13px;
+        line-height: 16px;
+        margin-top: 40px;
+        // margin: 0 auto;
+        text-align: center;
+        color: #999;
+    }
+}
+
+.copyRight {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #848484;
+}
